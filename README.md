@@ -2,9 +2,9 @@
 
 [Libra Checker](https://librachecker.com) is a Libra cryptocurrency block explorer. It is a web application that allows the user to easily explore the blockchain ledger - read data about accounts, addresses and transactions.
 
-This repository is a source code for the block explorer's front-end. Early beta version, use it at your own risk.
+This repository is the source code for the block explorer's front-end. Beta version.
 
-Tutorial for the backend is available [here](https://librastartup.com/blog/tutorial-how-to-create-block-explorer-for-libra-cryptocurrency-part-1-the-backend/).
+Tutorial for the back-end is available [here](https://librastartup.com/blog/tutorial-how-to-create-block-explorer-for-libra-cryptocurrency-part-1-the-backend/).
 
 
 ## Quickstart
