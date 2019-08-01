@@ -55,7 +55,7 @@
               </tbody>
             </table>
           </span>
-          <span v-else style="font-size:13px;letter-spacing:4px;">
+          <span v-else style="font-size:14px;letter-spacing:3px;">
             Loading... <span class="np-loading np-line" style="font-family: Arial, Helvetica, sans-serif;"></span>
           </span>
         
@@ -237,33 +237,6 @@ export default {
 </script>
 
 <style>
-
-  .header {
-    position:sticky;
-    z-index: 10;
-    width: 100%;
-    height:60px;
-    top:0px;
-    left: 0px;
-    padding-top: 20px;
-    border-bottom: 1px solid rgb(221, 221, 221);
-    background-color:white;
-  }
-
-  .header-inner {
-    max-width:1032px;
-    margin:0 auto;
-    padding:0 10px 0 10px;
-  }
-
-  @media only screen and (max-width: 600px) {
-    .header-inner {
-      padding:0 20px 0 20px;
-    }
-    .home {
-      margin-top:0px;
-    }
-  }
 
   .home-content {
     max-width: 800px;
