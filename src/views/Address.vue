@@ -1,10 +1,10 @@
 <template>
   <div class="reader">
 
-    <div class="read-content" style="margin-top:-20px;">
+    <div class="read-content" style="max-width: 800px; margin-top:-20px;">
       
       <h2>Address details</h2>
-      <br><br>
+      <br>
 
       Address: {{ address }}
       <br>
@@ -12,6 +12,11 @@
       <span v-if="address == '0000000000000000000000000000000000000000000000000000000000000000'">
         Address that mints testnet Libra coins.
       </span>
+
+      <span v-else-if="balance == 'error'" style="color:red;">
+        Address doesn't exist.
+      </span>
+
       <span v-else>
 
         <span v-if="balance != 0">
@@ -25,46 +30,48 @@
         
         <div style="border-top:1px solid #cccccc;width:100%;margin-top: 60px;padding-top:10px;"></div>
 
-        <h2>Recent transactions</h2>
+        <h2 v-if="balance != 'error'">Recent transactions</h2>
 
-        <div style="height:40px;"></div>
+        <div style="height:20px;"></div>
 
-        <div style="text-align:center;">
 
-          <table style="width:100%;" cellpadding="3">
-            <tbody>
-              <tr>
-                <th width="10%">ID</th>
-                <th width="27%" style="max-width:100px;">From</th>
-                <th width="26%">To</th>
-                <th width="16.5%">Value</th>
-                <th width="20.5%">Time</th>
-              </tr>
-              <tr v-for="tx in txs">
-                <td class="overflow-dots"><router-link v-bind:to="'/transaction/'+tx._id" class="link">{{tx._id}}</router-link></td>
-                <td class="overflow-dots"><router-link class="link" v-bind:to="'/address/'+tx.from">{{tx.from}}</router-link></td>
-                <td class="overflow-dots"><router-link v-bind:to="'/address/'+tx.to" class="link">{{tx.to}}</router-link></td>
-                <td class="overflow-dots">{{ (tx.value / 10000000).toFixed(2) }} LBR</td>
-                <td class="overflow-dots">{{ new Date(tx.time * 1000).toLocaleDateString("en-US", options) }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <table style="width:104%;margin-left:-2%;text-align:center;font-size:14px;">
+          <tbody>
+            <tr>
+              <th width="10%">ID</th>
+              <th width="30%" style="max-width:100px;">From</th>
+              <th width="29%">To</th>
+              <th width="12.5%">Value</th>
+              <th width="18.5%">Time</th>
+            </tr>
+            <tr v-for="tx in txs">
+              <td class="overflow-dots"><router-link v-bind:to="'/transaction/'+tx._id" class="link">{{tx._id}}</router-link></td>
+              <td class="overflow-dots"><router-link class="link" v-bind:to="'/address/'+tx.from">{{tx.from}}</router-link></td>
+              <td class="overflow-dots"><router-link v-bind:to="'/address/'+tx.to" class="link">{{tx.to}}</router-link></td>
+              <td class="overflow-dots">{{ (tx.value / 10000000).toFixed(2) }} LBR</td>
+              <td class="overflow-dots">{{ new Date(tx.time * 1000).toLocaleDateString("en-US", options) }}</td>
+            </tr>
+          </tbody>
+        </table>
 
-        </div>
 
       </span>
-
-      <div class="reader-footer">
-        <div class="width">
-          A project by <a href="https://librastartup.com" target="_blank">Libra Startup</a>
-
-          <div style="float:right;" class="sans-serif">
-            <router-link to="/" style="color:#828282;">Home</router-link>
-          </div>
-        </div>
-      </div>
-
     </div>
+
+    <div class="reader-footer">
+      <div class="width">
+
+        A project by <a href="https://librastartup.com" target="_blank">Libra Startup</a>
+
+        <div style="float:right;" class="sans-serif">
+          <a href="https://twitter.com/librachecker" target="_blank">Twitter</a>
+          &nbsp;|&nbsp;
+          <a href="https://github.com/giekaton/libra-checker" target="_blank">GitHub</a>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -84,19 +91,19 @@ export default {
   },
 
   beforeMount() {
-    console.log(this.address);
-    console.log(this.thHash);
+    // console.log(this.address);
+    // console.log(this.thHash);
+
     axios.post('https://api.librachecker.com', this.address)
     .then (
       response => {
+        // console.log(response);
         this.balance = response.data.balance;
         this.txs = response.data.txs;
-
       }
     )
-    .catch (
-      function (error) {
-        console.log (error);
+    .catch ( (error) => {
+        this.balance = 'error';
       }
     );
   },

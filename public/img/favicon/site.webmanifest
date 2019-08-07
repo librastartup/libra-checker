@@ -3,17 +3,17 @@
     "short_name": "Libra Checker",
     "icons": [
         {
-            "src": "https://librachecker.com/img/favicon/android-chrome-192x192.png?v=A07rrJNjqd",
+            "src": "https://librachecker.com/img/favicon/android-chrome-192x192.png?v=QEGEEkPqnl",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "https://librachecker.com/img/favicon/android-chrome-512x512.png?v=A07rrJNjqd",
+            "src": "https://librachecker.com/img/favicon/android-chrome-512x512.png?v=QEGEEkPqnl",
             "sizes": "512x512",
             "type": "image/png"
         }
     ],
-    "theme_color": "#39298c",
-    "background_color": "#39298c",
+    "theme_color": "#342d52",
+    "background_color": "#342d52",
     "display": "standalone"
 }

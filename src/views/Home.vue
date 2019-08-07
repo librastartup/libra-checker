@@ -6,12 +6,12 @@
 
       <div v-if="$route.name != 'about'">
 
-        <div class="centered" v-if="!$parent.content">
+        <div class="centered" v-if="!$parent.content" style="padding-top:20px;">
 
           <span>
 
             <h1>
-              Check Libra wallet address or transaction details
+              Check Libra wallet address and transaction details
             </h1>
 
             <h3 style="margin-top:10px;margin-bottom:28px;font-size:14px;">
@@ -25,11 +25,16 @@
 
         <div class="content-block" style="max-width:600px;margin:0 auto;margin-top:20px;text-align:center;">
         
-          <div style="max-width:600px;margin:0 auto;">
-            <input type="text" v-on:keyup.enter="searchClick" v-model="searchInput" placeholder="Address or Transaction ID" style="width:100%;height:35px;padding:5px;padding-top:6px;margin-bottom:2px;font-size:15px;margin-top:5px;outline:0;" autofocus>
+          <div class="effect-9-parent">
+            <input type="text" v-on:keyup.enter="searchClick" v-model="searchInput" placeholder="Address or Transaction ID" class="effect-9">
+            <span class="focus-border">
+              <i></i>
+            </span>
           </div>
-          <div style="height:10px;"></div>
-          <button @click="searchClick" style="margin:5px;width:140px;">Check</button>
+
+          <div style="height:10px;clear:both;"></div>
+
+          <button @click="searchClick" style="margin:5px;width:140px;font-family: 'Roboto Condensed', serif;">Check</button>
 
         </div>
 
@@ -55,8 +60,8 @@
               </tbody>
             </table>
           </span>
-          <span v-else style="font-size:14px;letter-spacing:3px;">
-            Loading... <span class="np-loading np-line" style="font-family: Arial, Helvetica, sans-serif;"></span>
+          <span v-else style="font-size:20px;">
+            <span class="np-loading np-line" style="font-family: Arial, Helvetica, sans-serif;"></span>
           </span>
         
         </div>
@@ -213,6 +218,8 @@ export default {
     },
 
     searchClick: function() {
+      this.searchInput = this.searchInput.trim();
+      
       if (this.searchInput.length < 1) { alert('Please enter Libra address or transaction ID'); return; }
 
       else if (this.searchInput.length < 32) {
@@ -237,12 +244,52 @@ export default {
 </script>
 
 <style>
+  .reader-footer {
+    background-color: #0000000d
+  }
+
+  /*= input focus effects css
+  =========================== */
+  :focus{outline: none;}
+
+  .effect-9 ~ .focus-border {position: absolute; bottom: 0; left: 0; width: 0; height: 1.4px; background-color: rgb(109, 109, 224);; transition: 0.4s;}
+  .effect-9:focus ~ .focus-border {width: 100%; transition: 0.4s;}
+
+  .effect-9-parent{float: left; width: 100%; position: relative;} /* necessary to give position: relative to parent. */
+  
+  input[type="text"]{
+    color: #333;
+    width: 100%;
+    /* letter-spacing: 1px; */
+    border: 1px solid rgb(179, 179, 179);
+    height:34px;
+    padding:5px;
+    padding-left: 7px;
+    font-size: 15px;
+    font-family: inherit;
+  }
+
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(190, 190, 190);
+    opacity: 1; /* Firefox */
+    font-size: 14px;
+  }
+
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(190, 190, 190);
+    font-size: 14px;
+  }
+
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(190, 190, 190);
+    font-size: 14px;
+  }
 
   .home-content {
     max-width: 800px;
     margin: 0 auto;
     clear:both;
-    padding-top: 80px;
+    padding-top: 60px;
     padding-bottom: 120px;
     text-align: left;
     font-size: 14px;
@@ -320,6 +367,7 @@ export default {
     margin-top: -0.3em;
     line-height: 1.5em;
     vertical-align: text-bottom;
+    color:var(--color-np-loading);
   }
 
   .np-loading::after {

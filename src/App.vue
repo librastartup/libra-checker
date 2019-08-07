@@ -15,11 +15,17 @@
 
         <div style="float:right;padding-top:2px;font-size:14px;" class="sans-serif">
           
-          <div @click="themeSwitch" class="pointer" style="display:inline-block;width:12px;margin-right:28px;">
+          <div @click="themeSwitch" class="pointer menu-link" style="width:12px;">
             <svg id="svg-contrast" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 893 893"><title>Theme switch</title><path d="M130.78,130.78A445.22,445.22,0,1,0,272.69,35.1,444.95,444.95,0,0,0,130.78,130.78ZM446.5,818A371.5,371.5,0,0,1,183.81,183.81,369.07,369.07,0,0,1,446.5,75V818Z"/></svg>
           </div>
 
-          <router-link to="/about">About</router-link>
+          <!-- <div class="menu-space"></div>
+
+          <router-link to="/faq" class="menu-link">FAQ</router-link> -->
+
+          <div class="menu-space"></div>
+
+          <router-link to="/about" class="menu-link">About</router-link>
 
         </div>
 
@@ -68,17 +74,35 @@ export default {
 </script>
 
 <style>
+
+.menu-space {
+  width: 28px;
+  display:inline-block;
+}
+
+@media screen and (max-width: 350px) {
+  .menu-space {
+    width: 14px;
+  }
+}
+
+.menu-link {
+  display:inline-block;
+}
+
 :root {
   --color-bg: #ffffff;
-  --color-font: #181818;
+  --color-font: #303030;
   --color-bg-header: #ffffff;
   --color-borderbottom-header: 1px solid #dddddd;
-  --color-a: #0000ee;
-  --color-svg-contrast: #000000;
+  /* --color-a: #5a43ce; */
+  --color-a: #00e;
+  --color-svg-contrast: #342D52;
   --color-svg-logo: #39298c;
-  --color-logo-text: #000000;
+  --color-logo-text: #222222;;
   --color-bg-footer: #ffffff;
   --color-bordertop-footer: 1px solid #dddddd;
+  --color-np-loading:#42318C;
 }
 
 [data-theme="dark"] {
@@ -92,6 +116,7 @@ export default {
   --color-logo-text: #ffffff;
   --color-bg-footer: #342d52;
   --color-bordertop-footer: 1px solid #6f7d81;
+  --color-np-loading:rgb(238, 238, 238);
 }
 
 * {
@@ -119,6 +144,11 @@ body {
 
 a, a:visited {
   color: var(--color-a);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .link {
@@ -159,12 +189,20 @@ a, a:visited {
 
 table { width:250px;table-layout:fixed; }
 table tr { height:1em; }
+table th { font-weight: normal!important; }
 td { overflow:hidden;white-space:nowrap;  } 
+
 
 h1 {
   margin-top:20px;
   margin-bottom:7px;
   font-size:22px;
+  /* letter-spacing: 0.6px; */
+}
+
+h2 {
+  /* letter-spacing: 0.3px; */
+  font-size: 18px;
 }
 
 h3 {
@@ -172,6 +210,7 @@ h3 {
   font-size:15px;
   text-align: center;
   font-weight:normal;
+  /* letter-spacing: 0.9px; */
 }
 
 .home {

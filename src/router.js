@@ -11,21 +11,24 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  },
   routes: [
     {
       path: '/',
       name: 'home',
       component: Home,
       meta: {
-        title: 'Libra Checker | Block Explorer - Check Address or Transaction Details',
+        title: 'Libra Block Explorer - Check Address or Transaction Details for Libra Cryptocurrency',
         metaTags: [
           {
             name: 'description',
-            content: 'Simple, open-source Libra Blockchain block explorer with tutorial. Built with Node.js, MongoDB, Libra-gRPC, Vue.js.'
+            content: 'Simple, open-source Libra explorer for the Libra Blockchain. Built with Node.js, MongoDB, Libra-gRPC, Vue.js, and with a step-by-step tutorial.'
           },
           {
             property: 'og:description',
-            content: 'Simple, open-source Libra Blockchain block explorer with tutorial. Built with Node.js, MongoDB, Libra-gRPC, Vue.js.'
+            content: 'Simple, open-source Libra explorer for the Libra Blockchain. Built with Node.js, MongoDB, Libra-gRPC, Vue.js, and with a step-by-step tutorial.'
           }
         ]
       }
@@ -36,12 +39,14 @@ export default new Router({
       component: Home,
       meta: {
         title: 'Libra Checker - About',
-        metaTags: [
-          {
-            property: 'og:description',
-            content: ''
-          }
-        ]
+      }
+    },
+    {
+      path: '/faq',
+      name: 'faq',
+      component: Home,
+      meta: {
+        title: 'Libra Checker - Frequently Asked Questions',
       }
     },
     {
