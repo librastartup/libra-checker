@@ -6,7 +6,11 @@
       <h2>Transaction details</h2>
       <br><br>
 
-      <div v-if="tx != null">
+      <div v-if="tx == 'not exist'">
+        <span style="color:red;">The transaction doesn't exist.</span>
+      </div>
+
+      <div v-else-if="tx != null">
         ID: {{ tx._id }}
         <br>
         From: <router-link v-bind:to="'/address/'+tx.from" class="link">{{ tx.from }}</router-link>
@@ -35,9 +39,6 @@
 
       <div v-else>
         Loading...
-        <br>
-        <br>
-        If it takes too much time, the transaction doesn't exist.
       </div>
 
     </div>
@@ -57,6 +58,8 @@
 
 <script>
 export default {
+  name: 'transaction',
+
   props: ['transaction'],
   components: {
     
@@ -73,7 +76,13 @@ export default {
     axios.post('https://api.librachecker.com', this.transaction)
     .then (
       response => {
-        this.tx = response.data;
+        console.log(response.data)
+        if (response.data == null) {
+          this.tx = 'not exist';
+        }
+        else {
+          this.tx = response.data;
+        }
       }
     )
     .catch (

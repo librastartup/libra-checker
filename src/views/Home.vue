@@ -4,7 +4,7 @@
 
     <div class="home-content">
 
-      <div v-if="$route.name != 'about'">
+      <div v-if="$route.name != 'about' && $route.name != 'faq'">
 
         <div class="centered" v-if="!$parent.content" style="padding-top:20px;">
 
@@ -60,7 +60,7 @@
               </tbody>
             </table>
           </span>
-          <span v-else style="font-size:20px;">
+          <span v-else style="font-size:18px;">
             <span class="np-loading np-line" style="font-family: Arial, Helvetica, sans-serif;"></span>
           </span>
         
@@ -68,9 +68,90 @@
 
       </div>
 
-      <div v-if="$route.name == 'about'">
+      <div v-if="$route.name == 'faq'">
+          <div class="content-block" style="margin-bottom:-20px;">
 
-        <div class="content-block" style="margin-top:0px;">
+            <h2 style="text-align:left;margin-bottom:60px;">Frequently Asked Questions</h2>
+
+
+            <div class="faq-question">
+              <b>Question:</b> WHAT? Would you mind explaining how in the world do you have a block explorer for a blockchain that is not yet even released? The site is constantly listing new transactions, where are those transactions coming from? Not to mention that Libra is most probably NOT going to have an open blockchain for you to even see those transactions.
+            </div>
+
+            <div class="faq-answer">
+              <b>Answer:</b> It will be open, see the whitepaper. Libra Checker is currently running on the Libra testnet, which is live.
+            </div>
+
+
+            <div class="faq-question">
+              <b>Question:</b> But why? Do you think Facebook wouldn't create their own block explorer and have a beautiful API designed for developers to create their own apps?
+            </div>
+
+            <div class="faq-answer">
+              <b>Answer:</b> Facebook will have similar rights to Libra as any other member of the Libra Association (see the whitepaper).
+              <br><br>
+              Also, they actively invite and encourage third-party developers to build products based around the Libra Blockchain.
+              <br><br>
+              A quote from the Libra whitepaper: "The Libra currency is built on the “Libra Blockchain.” Because it is intended to address a global audience, the software that implements the Libra Blockchain is open source — designed so that anyone can build on it, and billions of people can depend on it for their financial needs."
+            </div>
+
+
+            <div class="faq-question">
+              <b>Question:</b> Libra is owned by Facebook, a big company, and they will most likely have a trademark for it like any other product they have. You have illegally created your own block explorer for it which I don't think will be a good idea especially when Facebook tries to shut you down. Libra isn't like Bitcoin where you can create Logos, Coins, and Services out of it simply because you need to ask permission first to Facebook since it is their product. It's better to delete your website now before Facebook even notice you have one.
+            </div>
+
+            <div class="faq-answer">
+              <b>Answer:</b> Libra is not a commercial trademark.
+              <br><br>
+              To register it as a trademark and to restrict its use would be against Libra's mission and vision (see the whitepaper).
+              <br><br>
+              Furthermore, it would be close to impossible to protect Libra as a commercial trademark, because both the wordmark and the symbol are generic, something you would expect to be in the public domain.
+              <br><br>
+              Even the Libra logo is just a generic character: ≋
+            </div>
+            
+
+            <div class="faq-question">
+              <b>Question:</b> I see this (https://librastartup.com/) is your parent company and you have many projects listed which are using/for Libra. Are you a Libra supporter, or maybe a part of Libra marketing team?
+            </div>
+
+            <div class="faq-answer">
+              <b>Answer:</b> The creator of the Libra Checker is an independent serial maker and entrepreneur, who works on many apps. He also started the Libra Startup project and will try to make it unbiased and informative.
+            </div>
+            
+
+            <div class="faq-question">
+              <b>Question:</b> Quite surprising, there is news that Facebook's Libra coin is not going to launch at all, so what is this Libra explorer, it comes to early without the dev checking if the Libra coin is going to launch at all, or he is planning to launch his own libra coin since Facebook's libra coin will not push through.
+              <br><br>
+              Regulatory issues may be an insurmountable barrier to launch Libra global cryptocurrency project. It's been a month of speculation about Facebook's Libra coin and it's time for us to accept the reality that it's not going to happen anymore.
+            </div>
+
+            <div class="faq-answer">
+              <b>Answer:</b> Yes, there is a risk. Though the initial hearings were quite positive.
+            </div>
+            
+            <div class="faq-question">
+              <b>Question:</b> The block explorer keeps showing new blocks every few seconds. What is the block time for this coin? It's awfully (too) fast.
+            </div>
+
+            <div class="faq-answer">
+              <b>Answer:</b> A quote from the Libra whitepaper: "Unlike previous blockchains, which view the blockchain as a collection of blocks of transactions, the Libra Blockchain is a single data structure that records the history of transactions and states over time. This implementation simplifies the work of applications accessing the blockchain, allowing them to read any data from any point in time and verify the integrity of that data using a unified framework."
+            </div>
+
+            <div class="faq-question">
+              <b>Question:</b> Is it possible to also include the raw transaction data in your explorer instead of just the hashes? I mean something like bitcoin explorers have? Is the site still under development? Because I can’t see the tx fee and others (Public Key/Hash). What information will Explorer provide? Will it differ greatly from "BTC/ETH" explorer?
+            </div>
+
+            <div class="faq-answer">
+              <b>Answer:</b> Thanks for the suggestions, your feedback is always welcome. Yes, the blockchain provides more data, it will be included in the next version of the Libra Checker. Currently, it's in the early beta stage (MVP).
+            </div>
+
+          </div>
+      </div>
+
+      <div v-else-if="$route.name == 'about'">
+
+        <div class="content-block">
           <h2 style="text-align:left;margin-bottom:40px;">About</h2>
 
           Libra Checker is a Libra cryptocurrency block explorer. It is a web application that 
@@ -244,6 +325,15 @@ export default {
 </script>
 
 <style>
+  .faq-question {
+    margin-bottom: 20px;
+    /* font-weight: bold; */
+  }
+
+  .faq-answer {
+    margin-bottom:60px;
+  }
+
   .reader-footer {
     background-color: #0000000d
   }
@@ -290,7 +380,7 @@ export default {
     margin: 0 auto;
     clear:both;
     padding-top: 60px;
-    padding-bottom: 120px;
+    padding-bottom: 100px;
     text-align: left;
     font-size: 14px;
     padding-left:20px;
@@ -298,7 +388,7 @@ export default {
   }
 
   .content-block {
-    margin-top: 80px;
+    margin-top: 30px;
   }
 
   .centered {

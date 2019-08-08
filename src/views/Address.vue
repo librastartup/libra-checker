@@ -14,7 +14,7 @@
       </span>
 
       <span v-else-if="balance == 'error'" style="color:red;">
-        Address doesn't exist.
+        The address doesn't exist.
       </span>
 
       <span v-else>
@@ -77,6 +77,8 @@
 
 <script>
 export default {
+  name: 'address',
+
   props: ['address'],
   components: {
     

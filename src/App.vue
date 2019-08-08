@@ -19,9 +19,9 @@
             <svg id="svg-contrast" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 893 893"><title>Theme switch</title><path d="M130.78,130.78A445.22,445.22,0,1,0,272.69,35.1,444.95,444.95,0,0,0,130.78,130.78ZM446.5,818A371.5,371.5,0,0,1,183.81,183.81,369.07,369.07,0,0,1,446.5,75V818Z"/></svg>
           </div>
 
-          <!-- <div class="menu-space"></div>
+          <div class="menu-space"></div>
 
-          <router-link to="/faq" class="menu-link">FAQ</router-link> -->
+          <router-link to="/faq" class="menu-link">FAQ</router-link>
 
           <div class="menu-space"></div>
 
@@ -40,6 +40,7 @@
 <script>
 
 export default {
+  name: 'home',
   props: [''],
 
   components: {
