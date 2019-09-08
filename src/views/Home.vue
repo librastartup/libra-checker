@@ -38,6 +38,8 @@
 
         </div>
 
+        <!-- <div style="margin-top:50px;text-align:center;color:red;line-height:140%;">Breaking changes!<br>Follow status updates on <a href="https://twitter.com/librachecker" target="_blank">@librachecker</a></div> -->
+
         <div style="margin-top:100px;text-align:center;margin-bottom:-25px;"><h2 style="text-align:center;">Recent Transactions</h2>
         
           <span v-if="showTx">
@@ -88,9 +90,7 @@
             </div>
 
             <div class="faq-answer">
-              <b>Answer:</b> Facebook will have similar rights to Libra as any other member of the Libra Association (see the whitepaper).
-              <br><br>
-              Also, they actively invite and encourage third-party developers to build products based around the Libra Blockchain.
+              <b>Answer:</b> Libra actively invites and encourages third-party developers to build products based around the Libra Blockchain.
               <br><br>
               A quote from the Libra whitepaper: "The Libra currency is built on the “Libra Blockchain.” Because it is intended to address a global audience, the software that implements the Libra Blockchain is open source — designed so that anyone can build on it, and billions of people can depend on it for their financial needs."
             </div>
@@ -101,7 +101,9 @@
             </div>
 
             <div class="faq-answer">
-              <b>Answer:</b> Libra is not a commercial trademark.
+              <b>Answer:</b> Facebook will have similar rights to Libra as any other member of the Libra Association (see the whitepaper).
+              <br><br>
+              Libra is not supposed to be a commercial trademark.
               <br><br>
               To register it as a trademark and to restrict its use would be against Libra's mission and vision (see the whitepaper).
               <br><br>
@@ -112,7 +114,7 @@
             
 
             <div class="faq-question">
-              <b>Question:</b> I see this (https://librastartup.com/) is your parent company and you have many projects listed which are using/for Libra. Are you a Libra supporter, or maybe a part of Libra marketing team?
+              <b>Question:</b> I see this (librastartup.com) is your parent company and you have many projects listed which are using/for Libra. Are you a Libra supporter, or maybe a part of Libra marketing team?
             </div>
 
             <div class="faq-answer">
@@ -204,29 +206,19 @@
 
     </div>
 
-    <div class="reader-footer">
-      <div class="width">
-
-        A project by <a href="https://librastartup.com" target="_blank">Libra Startup</a>
-
-        <div style="float:right;" class="sans-serif">
-          <a href="https://twitter.com/librachecker" target="_blank">Twitter</a>
-          &nbsp;|&nbsp;
-          <a href="https://github.com/giekaton/libra-checker" target="_blank">GitHub</a>
-        </div>
-
-      </div>
-    </div>
+    <lc-footer />
 
   </div>
 </template>
 
 <script>
+import lcFooter from './Footer.vue';
+
 export default {
   name: 'home',
 
   components: {
-
+    lcFooter
   },
 
   data: function() {
@@ -280,7 +272,7 @@ export default {
     getLatestTx: function() {
       this.interval = setInterval(() => {
         console.log('Update latest txs');
-        axios.get('https://api.librachecker.com')
+        axios.get(libraCheckerApi+'/recent_txn')
         .then (
           response => {
             this.txs = [];

@@ -46,7 +46,7 @@
             </tr>
             <tr v-for="tx in txs">
               <td class="overflow-dots"><router-link v-bind:to="'/transaction/'+tx._id" class="link">{{tx._id}}</router-link></td>
-              <td class="overflow-dots"><router-link class="link" v-bind:to="'/address/'+tx.from">{{tx.from}}</router-link></td>
+              <td class="overflow-dots"><router-link v-bind:to="'/address/'+tx.from"  class="link">{{tx.from}}</router-link></td>
               <td class="overflow-dots"><router-link v-bind:to="'/address/'+tx.to" class="link">{{tx.to}}</router-link></td>
               <td class="overflow-dots">{{ (tx.value / 10000000).toFixed(2) }} LBR</td>
               <td class="overflow-dots">{{ new Date(tx.time * 1000).toLocaleDateString("en-US", options) }}</td>
@@ -58,31 +58,23 @@
       </span>
     </div>
 
-    <div class="reader-footer">
-      <div class="width">
-
-        A project by <a href="https://librastartup.com" target="_blank">Libra Startup</a>
-
-        <div style="float:right;" class="sans-serif">
-          <a href="https://twitter.com/librachecker" target="_blank">Twitter</a>
-          &nbsp;|&nbsp;
-          <a href="https://github.com/giekaton/libra-checker" target="_blank">GitHub</a>
-        </div>
-
-      </div>
-    </div>
+    <lc-footer />
 
   </div>
 </template>
 
 <script>
+import lcFooter from './Footer.vue';
+
 export default {
   name: 'address',
 
   props: ['address'],
+
   components: {
-    
+    lcFooter
   },
+
   data: function() {
     return {
       // addressData: null,
@@ -92,30 +84,49 @@ export default {
     }
   },
 
-  beforeMount() {
-    // console.log(this.address);
-    // console.log(this.thHash);
+  watch:{
+    '$route' (to, from) {
+      this.balance = 0;
+      this.txs = [];
+      this.getData();
+    }
+  },
 
-    axios.post('https://api.librachecker.com', this.address)
-    .then (
-      response => {
-        // console.log(response);
-        this.balance = response.data.balance;
-        this.txs = response.data.txs;
-      }
-    )
-    .catch ( (error) => {
-        this.balance = 'error';
-      }
-    );
+  beforeMount() {
+    // console.log(this.balance);
+    // console.log('beforeMount');
+
+    this.getData();
   },
 
   mounted () {
+    // console.log(this.balance);
+    // console.log('mounted');
+
     document.getElementById('splashScreen').style.display = 'none';
     window.scrollTo(0, 0);
   },
+
+  // beforeDestroy() {
+  //   console.log(this.balance);
+  //   console.log('beforeDestroy');
+  // },
+
   methods: {
-    
+    getData () {
+      axios.get(libraCheckerApi+'/address_info/?address='+this.address)
+      .then (
+        response => {
+          // console.log(response);
+          this.balance = response.data.balance;
+          this.txs = response.data.txs;
+        }
+      )
+      .catch ( (error) => {
+          this.balance = 'error';
+        }
+      );
+    },
   }
 }
 </script>
