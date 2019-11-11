@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<browserconfig>
-    <msapplication>
-        <tile>
-            <square150x150logo src="https://librachecker.com/img/favicon/mstile-150x150.png?v=QEGEEkPqnl"/>
-            <TileColor>#342d52</TileColor>
-        </tile>
-    </msapplication>
-</browserconfig>
