@@ -8,32 +8,40 @@
       <div style="height:20px;"></div>
 
       <div v-if="tx == 'not exist'">
-        <span style="color:red;">The transaction doesn't exist.</span>
+        <span style="color:red;">This transaction (ID: {{ transaction }}) does not exist.</span>
       </div>
 
       <div v-else-if="tx != null">
-        ID: {{ tx._id }}
+        ID: {{ tx.id }}
         <br>
-        From: <router-link v-bind:to="'/address/'+tx.from" class="link">{{ tx.from }}</router-link>
+        From:&nbsp;&nbsp;<router-link v-bind:to="'/address/'+tx.sender" class="link"><div style="display:inline-block;width:12px;height:12px;margin-right:4px;" v-html="libraidenticon(tx.sender)"></div>{{ tx.sender }}</router-link>
         <br>
-        To: <router-link v-bind:to="'/address/'+tx.to" class="link">{{ tx.to }}</router-link>
+        To:&nbsp;&nbsp;<router-link v-bind:to="'/address/'+tx.receiver" class="link"><div style="display:inline-block;width:12px;height:12px;margin-right:4px;" v-html="libraidenticon(tx.receiver)"></div>{{ tx.receiver }}</router-link>
         <br>
-        Value: {{ (tx.value / 10000000).toFixed(2) }} LBR
+        Value: {{ formatterMethod(tx.value / 1000000) }} LBR
         <br>
-        Time: {{ new Date(tx.time * 1000).toLocaleDateString("en-US", options) }}
+        Expiration time: {{ new Date(tx.time * 1000).toLocaleDateString("en-US", options) }}
         <br>
-        Sequence nr: {{ tx.seq_nr }}
+        Sequence number: {{ tx.seq }}
         <br>
-        Gas price: {{ tx.gas_price }}
+        Gas price: {{ (tx.gas_price / 1000000).toFixed(2) }} LBR
         <br>
-        Gas max: {{ tx.gas_max }}
+        Gas max: {{ (tx.gas_max / 1000000).toFixed(2) }} LBR
         <br>
-        Gas used: {{ tx.gas_used }}
+        <!-- Gas used: {{ tx.gas_used }} -->
+        Transaction type: {{ (tx.type) }}
+        <br>
+        Transaction status: 
+        <span v-if="tx.status == 'success'">Success</span>
+        <span v-else style="color:red;">Failed</span>
 
-        <div style="height:30px;"></div>
+        <div style="height:40px;"></div>
 
         <span style="color:#888;">
-          senderPublicKey: {{ tx.senderPublicKey }}
+          Public key:<br>{{ tx.public_key }}
+          <div style="height:20px;"></div>
+          Signature:<br>{{ tx.signature }}
+          <!-- senderPublicKey: {{ tx.senderPublicKey }}
           <br>
           senderSignature: {{ tx.senderSignature }}
           <br>
@@ -43,7 +51,7 @@
           <br>
           eventRootHash: {{ tx.eventRootHash }}
           <br>
-          rawTxnBytes: {{ tx.rawTxnBytes }}
+          rawTxnBytes: {{ tx.rawTxnBytes }} -->
         </span>
 
         <div style="border-top:1px solid #cccccc;width:100%;margin-top: 60px;padding-top:10px;"></div>
@@ -110,6 +118,14 @@ export default {
   },
   methods: {
     
+    libraidenticon(address) {
+      return(libraidenticon(address));
+    },
+
+    formatterMethod: function(val) {
+      let value = formatterLC.format(Number(val));
+      return value;
+    },
   }
 }
 </script>

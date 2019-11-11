@@ -20,7 +20,7 @@ export default new Router({
       name: 'home',
       component: Home,
       meta: {
-        title: 'Libra Block Explorer - Check Address or Transaction Details for Libra Cryptocurrency',
+        title: 'Libra Checker - Libra Block Explorer, Check Libra Address and Transactions',
         metaTags: [
           {
             name: 'description',
@@ -39,14 +39,6 @@ export default new Router({
       component: Home,
       meta: {
         title: 'Libra Checker - About',
-      }
-    },
-    {
-      path: '/faq',
-      name: 'faq',
-      component: Home,
-      meta: {
-        title: 'Libra Checker - Frequently Asked Questions',
       }
     },
     {

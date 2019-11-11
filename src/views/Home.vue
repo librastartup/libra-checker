@@ -6,16 +6,16 @@
 
       <div v-if="$route.name != 'about' && $route.name != 'faq'">
 
-        <div class="centered" v-if="!$parent.content" style="padding-top:20px;">
+        <div class="centered home-search-div" v-if="!$parent.content">
 
           <span>
 
             <h1>
-              Check Libra wallet address and transaction details
+              Libra Cryptocurrency Blockchain Explorer
             </h1>
 
             <h3 style="margin-top:10px;margin-bottom:28px;font-size:14px;">
-              A Minimalist Libra Cryptocurrency Blockchain Explorer
+              Check Libra Wallet Address and Transaction Details
             </h3>
 
             <div style="height:3px;"></div>
@@ -23,10 +23,10 @@
             
         </div>
 
-        <div class="content-block" style="max-width:600px;margin:0 auto;margin-top:20px;text-align:center;">
+        <div class="content-block" style="max-width:550px;margin:0 auto;margin-top:10px;text-align:center;">
         
           <div class="effect-9-parent">
-            <input type="text" v-on:keyup.enter="searchClick" v-model="searchInput" placeholder="Address or Transaction ID" class="effect-9">
+            <input type="text" v-on:keyup.enter="searchClick" v-model="searchInput" placeholder="Address or Transaction ID" class="effect-9" style="text-align:center;">
             <span class="focus-border">
               <i></i>
             </span>
@@ -34,13 +34,13 @@
 
           <div style="height:10px;clear:both;"></div>
 
-          <button @click="searchClick" style="margin:5px;width:140px;font-family: 'Roboto Condensed', serif;">Check</button>
+          <button @click="searchClick" class="button-check">Check</button>
 
         </div>
 
         <!-- <div style="margin-top:50px;text-align:center;color:red;line-height:140%;">Breaking changes!<br>Follow status updates on <a href="https://twitter.com/librachecker" target="_blank">@librachecker</a></div> -->
 
-        <div style="margin-top:100px;text-align:center;margin-bottom:-25px;"><h2 style="text-align:center;">Recent Transactions</h2>
+        <div class="home-recent-txn"><h2 style="text-align:center;">Recent Transactions</h2>
         
           <span v-if="showTx">
             <table style="width:100%;" cellpadding="3">
@@ -49,14 +49,14 @@
                   <th width="10%">ID</th>
                   <th width="27%" style="max-width:100px;">From</th>
                   <th width="26%">To</th>
-                  <th width="16.5%">Value</th>
-                  <th width="20.5%">Time</th>
+                  <th width="16.5%"><div class="value-mobile">Value</div><div class="value-desktop">Value in LBR</div></th>
+                  <th width="20.5%"><div class="value-mobile">Time</div><div class="value-desktop">Expiration Time</div></th>
                 </tr>
                 <tr v-for="tx in txs">
-                  <td class="overflow-dots"><router-link v-bind:to="'/transaction/'+tx._id" class="link">{{tx._id}}</router-link></td>
-                  <td class="overflow-dots"><router-link class="link" v-bind:to="'/address/'+tx.from">{{tx.from}}</router-link></td>
-                  <td class="overflow-dots"><router-link v-bind:to="'/address/'+tx.to" class="link">{{tx.to}}</router-link></td>
-                  <td class="overflow-dots">{{ (tx.value / 10000000).toFixed(2) }} LBR</td>
+                  <td class="overflow-dots"><router-link v-bind:to="'/transaction/'+tx.id" class="link">{{tx.id}}</router-link></td>
+                  <td class="overflow-dots"><router-link class="link" v-bind:to="'/address/'+tx.sender"><div style="display:inline-block;width:12px;height:12px;margin-right:4px;" v-html="libraidenticon(tx.sender)"></div>{{tx.sender}}</router-link></td>
+                  <td class="overflow-dots"><router-link v-bind:to="'/address/'+tx.receiver" class="link"><div style="display:inline-block;width:12px;height:12px;margin-right:4px;" v-html="libraidenticon(tx.receiver)"></div>{{tx.receiver}}</router-link></td>
+                  <td class="overflow-dots">{{ formatterMethod(tx.value / 1000000) }} ≋</td>
                   <td class="overflow-dots">{{ new Date(tx.time * 1000).toLocaleDateString("en-US", options) }}</td>
                 </tr>
               </tbody>
@@ -153,53 +153,115 @@
 
       <div v-else-if="$route.name == 'about'">
 
-        <div class="content-block">
+        <div class="content-block" style="font-size:15px;">
           <h2 style="text-align:left;margin-bottom:40px;">About</h2>
 
-          Libra Checker is a Libra cryptocurrency block explorer. It is a web application that 
-          allows the user to easily explore the blockchain ledger - read data about
-          accounts, addresses and transactions.
+          <p>
+            Libra Checker is a Libra cryptocurrency block explorer.
+          </p>
 
-          <br>
-          <br>
-          <br>
-          <br>
+          <p>
+            The mission of Libra Checker is to create access for the general public to read data from the Libra Blockchain in a simple and effortless way.
+          </p>
 
-          To check address balance and transactions:
-          <ul>
-            <li>
-              Enter the address in Libra Checker's search field.
-            </li>
-            <li style="margin-top:7px;">
-                Use a direct link (https://librachecker.com/address/<i>address_to_check</i>) as in this example: <div class="overflow-dots" style="padding-bottom:1px;"><a href="/address/504c202566b97069c68f96faa1dd24a73d6c3b9b58deda2ce77d35c10960351d" style="font-size:13px;line-height:130%;" target="_blank">https://librachecker.com/address/504c202566b97069c68f96faa1dd24a73d6c3b9b58deda2ce77d35c10960351d</a><br>
-              </div>
-            </li>
-          </ul>
+          <p>
+            With the help of Libra Checker, users can find information about Libra transactions, addresses, metadata, and in the future - Libra smart contracts data.
+          </p>
 
-          <br>
-          <br>
+          <p>
+            Libra Checker is a privacy-focused service. Besides Google Analytics with IP anonymization, we do not use any trackers or cookies. We do not collect any personal information about website users.
+          </p>
+
+          <p>Libra Checker is currently running on the latest Libra blockchain testnet.</p>
+  
+          <p>Follow and fork Libra Checker on <a href="https://twitter.com/librachecker" target="_blank">Twitter</a> and <a href="https://github.com/giekaton/libra-checker" target="_blank">GitHub</a>.</p>
+   
+          <div style="height:20px;"></div>
           
-          To check transation details:
-          <ul>
-            <li>
-              Enter transaction's ID (e.g. 156684) in Libra Checker's search field.
-            </li>
-            <li style="margin-top:7px;">
-                Use a direct link (https://librachecker.com/transaction/<i>transaction_to_check</i>) as in this example: <div class="overflow-dots" style="padding-bottom:1px;"><a href="/transaction/83315" style="font-size:13px;line-height:130%;" target="_blank">https://librachecker.com/transaction/83315</a><br>
-              </div>
-            </li>
-          </ul>
+          <p>
+            To check address balance and transactions:
+            <ul>
+              <li>
+                Enter the address in Libra Checker's search field.
+              </li>
+              <li style="margin-top:7px;">
+                  Use a direct link: https://librachecker.com/address/ADDRESS
+                  <!-- as in this example: <div class="overflow-dots" style="padding-bottom:1px;"><a href="/address/504c202566b97069c68f96faa1dd24a73d6c3b9b58deda2ce77d35c10960351d" style="font-size:13px;line-height:130%;" target="_blank">https://librachecker.com/address/504c202566b97069c68f96faa1dd24a73d6c3b9b58deda2ce77d35c10960351d</a><br>
+                </div> -->
+              </li>
+            </ul>
+          </p>
 
-          <br>
-          <br>
+          <div style="height:20px;"></div>
+          
+          <p>
+            To check transaction details:
+            <ul>
+              <li>
+                Enter the transaction's ID (e.g. 1786) in Libra Checker's search field.
+              </li>
+              <li style="margin-top:7px;">
+                  Use a direct link: https://librachecker.com/transaction/TRANSACTION
+                  <!-- as in this example: <div class="overflow-dots" style="padding-bottom:1px;"><a href="/transaction/4684" style="font-size:13px;line-height:130%;" target="_blank">https://librachecker.com/transaction/4684</a><br> -->
+                <!-- </div> -->
+              </li>
+            </ul>
+          </p>
 
-          <br><br>
-          Besides Google Analytics with IP anonymization, we do not use any trackers or cookies. We do not collect any personal information about the website users.
-          <br><br><br>
-          Curious how Libra Checker was created? See this <a href="https://librastartup.com/blog/tutorial-how-to-create-block-explorer-for-libra-cryptocurrency-part-1-the-backend/" target="_blank">tutorial</a>.
-          <br><br><br>
-          Follow and fork Libra Checker on <a href="https://twitter.com/librachecker" target="_blank">Twitter</a> and <a href="https://github.com/giekaton/libra-checker" target="_blank">GitHub</a>.
-          <br><br><br>
+          <div style="height:40px;"></div>
+          
+          <h2 style="text-align:left;margin-bottom:40px;">Development</h2>
+
+          <p>Libra is an open payments ecosystem that actively invites and encourages third-party developers to build products and services around the Libra Blockchain.</p>
+
+          <div style="height:5px;"></div>
+          
+          <i>
+            The Libra currency is built on the “Libra Blockchain.” Because it is intended to address a global audience, 
+            the software that implements the Libra Blockchain is open source — designed so that anyone can build on it, and billions of people can depend on it for their 
+            financial needs.
+            <br>
+            — <a href="https://librazilla.com/docs/LibraWhitePaper_en_US.pdf" target="_blank">Libra White Paper</a>
+          </i>
+          
+          <div style="height:5px;"></div>
+          
+          <p>According to the white paper, Facebook will have similar rights to Libra as any other member of the Libra Association.</p>
+
+          <p>Libra is not supposed to be a commercial trademark. To register it as a trademark and to restrict its use would be against Libra's Mission and Vision. 
+          Furthermore, it would be close to impossible to protect Libra as a commercial trademark, because both the wordmark and the symbol are generic, something 
+          you would expect to be in the public domain. Even the Libra symbol <a href="https://graphemica.com/%E2%89%8B" target="_blank">≋</a> is just a generic character.</p>
+
+          <div style="height:20px;"></div>
+
+          <p>Libra Checker is an independent project created by <a href="https://librastartup.com" target="_blank">Libra Startup</a>. It is not affiliated with Facebook.</p>
+
+          <p>
+            Currently, Libra Checker is in the early beta stage. It will continue improving to track millions (or billions) of 
+            Libra transactions from the upcoming Libra live network. The planned launch for the Libra mainnet is for the 2-nd half of 2020.
+          </p>
+
+          <div style="height:40px;"></div>
+
+          <h2 style="text-align:left;margin-bottom:40px;">Open Source</h2>
+
+          <p>
+          Libra Checker is open source and it also has a <a href="https://librastartup.com/blog/tutorial-how-to-create-block-explorer-for-libra-cryptocurrency-part-1-the-backend/" target="_blank">tutorial</a>.
+          </p>
+
+          <p>
+          <a href="https://github.com/librastartup/libra-checker" target="_blank">/libra-chekcer</a> - Frontend Vue.js app
+          <br>
+          <a href="https://github.com/librastartup/libra-checker-grpc" target="_blank">/libra-chekcer-grpc</a> - Backend gRPC client
+          <br>
+          <a href="https://github.com/librastartup/libra-checker-api" target="_blank">/libra-checker-api</a> - Express.js app to connect backend-frontend
+          </p>
+          
+          <p>
+          Thanks to the Libra open-source developers community for their work and help.
+          </p>
+          
+          <div style="height:30px;"></div>
         </div>
 
       </div>
@@ -269,6 +331,15 @@ export default {
 
   methods: {
 
+    libraidenticon(address) {
+      return(libraidenticon(address));
+    },
+
+    formatterMethod: function(val) {
+      let value = formatterLC.format(Number(val));
+      return value;
+    },
+
     getLatestTx: function() {
       this.interval = setInterval(() => {
         console.log('Update latest txs');
@@ -317,6 +388,27 @@ export default {
 </script>
 
 <style>
+  .home-recent-txn {
+    margin-top:80px;
+    text-align:center;
+  }
+
+  .home-search-div {
+    padding-top:15px;
+  }
+
+  @media screen and (max-width: 430px) {
+    .home-recent-txn {
+      margin-top: 45px;
+    }
+    .home-search-div {
+      padding-top: 0px;
+    }
+    .home-search-div h1 {
+      margin-top: 5px;
+    }
+  }
+
   .faq-question {
     margin-bottom: 20px;
     /* font-weight: bold; */
@@ -345,8 +437,7 @@ export default {
     /* letter-spacing: 1px; */
     border: 1px solid rgb(179, 179, 179);
     height:34px;
-    padding:5px;
-    padding-left: 7px;
+    padding-top:3px;
     font-size: 15px;
     font-family: inherit;
   }
@@ -371,12 +462,25 @@ export default {
     max-width: 800px;
     margin: 0 auto;
     clear:both;
-    padding-top: 60px;
+    padding-top: 30px;
     padding-bottom: 100px;
     text-align: left;
     font-size: 14px;
     padding-left:20px;
     padding-right:20px;
+  }
+
+  .value-mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 800px) {
+    .value-mobile {
+      display: block;
+    }
+    .value-desktop {
+      display: none;
+    }
   }
 
   .content-block {
@@ -398,9 +502,10 @@ export default {
     margin-top: 5px;
     margin-bottom: 5px;
     background-color: rgb(134, 134, 134);
-    border-color: rgb(170, 170, 170);
+    border-color: #b9b9b9;
     color: white;
     cursor: pointer;
+    width: 135px;
   }
 
   button:focus {

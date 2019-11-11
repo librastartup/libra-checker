@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no">
 
-    <!-- Title and description -->
-    <title>Libra Block Explorer - Check Address or Transaction Details for Libra Cryptocurrency</title>
-    <meta name="description" content="Simple, open-source Libra explorer for the Libra Blockchain. Built with Node.js, MongoDB, Libra-gRPC, Vue.js, and with a step-by-step tutorial.">
+    <!-- Meta -->
+    <title>Libra Checker - Libra Block Explorer, Check Libra Address and Transactions</title>
+    <meta name="description" content="Simple and fast, open-source Libra explorer for the Libra Blockchain. Built with Node.js, PostgreSQL, Vue.js and with a step-by-step tutorial.">
 
     <link rel="apple-touch-icon" sizes="180x180" href="https://librachecker.com/img/favicon/apple-touch-icon.png?v=QEGEEkPqnl">
     <link rel="icon" type="image/png" sizes="32x32" href="https://librachecker.com/img/favicon/favicon-32x32.png?v=QEGEEkPqnl">
@@ -39,22 +39,22 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57930548-42"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-57930548-42');
-    </script>
+    <script src="https://libraidenticon.com/libraidenticon-0.0.1.lc.js?v=001"></script>
 
     <script>
       // Globals
 
-      libraCheckerApi = 'https://api.librachecker.com';
-      // libraCheckerApi = 'http://localhost:3000';
+      // libraCheckerApi = 'https://api.librachecker.com';
+      libraCheckerApi = 'http://localhost:3000';
+    </script>
+
+    <script>
+      formatterLC = new Intl.NumberFormat('en-US', {
+        style: 'decimal',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })
     </script>
 
   </head>
@@ -64,7 +64,7 @@
       <strong>We're sorry but Libra Checker doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
 
-    <div id="splashScreen" style="position:absolute;width:60px;height:60px;top:50%;left:50%;margin-top:-30px;margin-left:-30px;background-color:white;">
+    <div id="splashScreen" style="position:absolute;width:50px;height:50px;top:50%;left:50%;margin-top:-25px;margin-left:-25px;background-color:white;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240.95 240.95"><title>Libra Checker Logo</title><path d="M425.95,279.33a96.15,96.15,0,0,1-19.22,19,73.29,73.29,0,0,1-14.7,8.42v36.11A104.81,104.81,0,0,0,425.95,329V279.33h0Zm-207,84.78A104.58,104.58,0,0,0,185,378.24v49.82a96.82,96.82,0,0,1,19.18-19,72.86,72.86,0,0,1,14.74-8.36v-36.6h0Zm69.24,6.06A127.15,127.15,0,0,0,253.54,362v34.15c11.56,1.17,22.07,4.93,34.62,10.93V370.17h0Zm69.24,27.15c-11.5-1.19-22-5-34.62-11v36.78a129.09,129.09,0,0,0,34.62,7.86V397.31h0Zm68.54-32a96.15,96.15,0,0,1-19.22,19,73.28,73.28,0,0,1-14.7,8.42v36.11A104.81,104.81,0,0,0,425.95,415V365.33h0Zm-207,84.78A104.63,104.63,0,0,0,185,464.24v49.82a96.6,96.6,0,0,1,19.18-19,72.31,72.31,0,0,1,14.74-8.38V450.11h0Zm69.24,6.06A127.13,127.13,0,0,0,253.54,448v34.16c11.56,1.17,22.07,4.93,34.62,10.93V456.16h0Zm69.24,27.15c-11.5-1.19-22-5-34.62-11v36.79a129.08,129.08,0,0,0,34.62,7.86V483.31h0Zm68.54-32a96,96,0,0,1-19.22,19,73.28,73.28,0,0,1-14.7,8.42v36.12a104.8,104.8,0,0,0,33.92-13.78V451.33h0Zm-207-173.21A104.73,104.73,0,0,0,185,292.25V342a96.84,96.84,0,0,1,19.18-19,72.86,72.86,0,0,1,14.74-8.36V278.12h0Zm69.24,6A127.05,127.05,0,0,0,253.54,276v34.16c11.56,1.17,22.07,4.93,34.62,10.93V284.15h0Zm69.24,27.15c-11.5-1.19-22-5-34.62-11v36.78a129.12,129.12,0,0,0,34.62,7.86V311.31h0Z" transform="translate(-185 -276)" style="fill:#39298c"/></svg>
     </div>
 

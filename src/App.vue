@@ -15,13 +15,13 @@
 
         <div style="float:right;padding-top:2px;font-size:14px;" class="sans-serif">
           
-          <div @click="themeSwitch" class="pointer menu-link" style="width:12px;">
-            <svg id="svg-contrast" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 893 893"><title>Theme switch</title><path d="M130.78,130.78A445.22,445.22,0,1,0,272.69,35.1,444.95,444.95,0,0,0,130.78,130.78ZM446.5,818A371.5,371.5,0,0,1,183.81,183.81,369.07,369.07,0,0,1,446.5,75V818Z"/></svg>
+          <div @click="themeSwitch" class="pointer menu-link" style="width:12px;" title="Switch theme">
+            <svg id="svg-contrast" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 893 893"><title>Switch theme</title><path d="M130.78,130.78A445.22,445.22,0,1,0,272.69,35.1,444.95,444.95,0,0,0,130.78,130.78ZM446.5,818A371.5,371.5,0,0,1,183.81,183.81,369.07,369.07,0,0,1,446.5,75V818Z"/></svg>
           </div>
 
-          <div class="menu-space"></div>
+          <!-- <div class="menu-space"></div> -->
 
-          <router-link to="/faq" class="menu-link">FAQ</router-link>
+          <!-- <router-link to="/faq" class="menu-link">FAQ</router-link> -->
 
           <div class="menu-space"></div>
 
@@ -54,6 +54,21 @@ export default {
     }
   },
 
+  beforeMount: function() {
+    console.log(this.$cookies.get('lcTheme'));
+    // if (!this.$cookies.isKey('lcTheme')) {
+    //   this.$cookies.set('lcTheme', 'light', Infinity);
+    // }
+
+    if (this.$cookies.get('lcTheme') == 'light') {
+      this.themeLight = true;
+    }
+    else if (this.$cookies.get('lcTheme') == 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      this.themeLight = false;
+    }
+  },
+
   mounted () {
 
   },
@@ -63,9 +78,13 @@ export default {
     themeSwitch: function() {
       if (this.themeLight) {
         document.body.setAttribute('data-theme', 'dark');
+        this.$cookies.set('lcTheme', 'dark', Infinity);
+        // console.log(this.$cookies.get('lcTheme'));
       }
       else {
         document.body.removeAttribute('data-theme');
+        this.$cookies.set('lcTheme', 'light', Infinity);
+        // console.log(this.$cookies.get('lcTheme'));
       }
       this.themeLight = !this.themeLight;
     }
@@ -104,6 +123,10 @@ export default {
   --color-bg-footer: #ffffff;
   --color-bordertop-footer: 1px solid #dddddd;
   --color-np-loading:#42318C;
+  --color-button-check-bg: #868686;
+  --color-button-check-border: #b9b9b9; 
+  /* --color-button-check-bg: #3c3750;
+  --color-button-check-border: #998dc7; */
 }
 
 [data-theme="dark"] {
@@ -111,17 +134,28 @@ export default {
   --color-font: #fcfcfc;
   --color-bg-header: #342d52;
   --color-borderbottom-header: 1px solid #6f7d81;
-  --color-a: #ffffff;
+  --color-a: #CABEFF;
   --color-svg-contrast: #ffffff;
   --color-svg-logo: #ffffff;
   --color-logo-text: #ffffff;
   --color-bg-footer: #342d52;
   --color-bordertop-footer: 1px solid #6f7d81;
   --color-np-loading:rgb(238, 238, 238);
+  /* --color-button-check-bg: #3c3750;
+  --color-button-check-border: #998dc7; */
+  --color-button-check-bg: #868686;
+  --color-button-check-border: #b9b9b9; 
 }
 
 * {
   box-sizing: border-box;
+}
+
+.button-check {
+  margin:5px;
+  font-family: 'Roboto Condensed', serif;
+  background-color: var(--color-button-check-bg);
+  border-color: var(--color-button-check-border);
 }
 
 #svg-logo { fill:var(--color-svg-logo); }
@@ -208,7 +242,7 @@ h2 {
 
 h3 {
   margin-top:10px;
-  font-size:15px;
+  font-size:16px;
   text-align: center;
   font-weight:normal;
   /* letter-spacing: 0.9px; */
@@ -266,11 +300,11 @@ h3 {
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 50px;
+  height: 62px;
   width: 100%;
   overflow: hidden;
   font-size: 14px;
-  padding-top: 15px;
+  padding-top: 20px;
 }
 
 .width {

@@ -1,13 +1,20 @@
 # Libra Checker
 
-[Libra Checker](https://librachecker.com) is a Libra cryptocurrency block explorer. It is a web application that allows the user to easily explore the blockchain ledger - read data about accounts, addresses and transactions.
+[Libra Checker](https://librachecker.com) is a Libra cryptocurrency block explorer.
 
-This repository is the source code for the block explorer's front-end. Beta version.
+This repository is the source code for the Libra Checker's frontend (Vue.js app).
 
-Tutorial for the back-end is available [here](https://librastartup.com/blog/tutorial-how-to-create-block-explorer-for-libra-cryptocurrency-part-1-the-backend/).
+To run your own instance of Libra Checker, you also need the other two parts:
 
+[libra-checker-grpc](https://github.com/librastartup/libra-checker-grpc) (Node.js gRPC client + Python/JavaScript LCS to fetch and deserialize transactions)
 
-## Quickstart
+[libra-checker-api](https://github.com/librastartup/libra-checker-api) (Express.js API that passes data from backend to frontend)
+<br>
+<br>
+Follow the [tutorial](https://librastartup.com/blog/tutorial-how-to-create-block-explorer-for-libra-cryptocurrency-part-1-the-backend/) to run your own Libra Checker.
+<br>
+<br>
+## Frontend Quickstart
 
 #### Project setup
 ```
